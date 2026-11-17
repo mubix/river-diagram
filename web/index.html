@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#12344b"><meta name="description" content="Build presentation-ready rivers that show how security controls reduce a threat.">
+<title>River — threat reduction diagrams</title>
+<link rel="icon" href="/favicon.svg?v=riverbanks" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
+<script type="module" src="/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#inspector">Skip to editor</a>
+<header class="app-header">
+<a href="/" class="brand" aria-label="River home"><svg viewBox="0 0 36 36" aria-hidden="true"><path d="M2 7C7 7 10 10 17 9V14C23 14 27 11 34 13V23C27 21 23 24 17 24V29C10 30 7 27 2 27Z" fill="currentColor"/><path d="M15 9h4v5h-4ZM15 24h4v5h-4Z" fill="#4d9eaa"/><path d="M4 16q5 2 9 0m8 3q5-2 10-1" fill="none" stroke="#ffffff" stroke-width="1.2" opacity=".65"/></svg><span>River</span></a>
+<div class="header-divider"></div><span class="product-purpose">Make the reduction visible.</span>
+<nav class="header-actions" aria-label="River actions"><button id="library-btn" class="quiet">Saved rivers</button><button id="new-btn" class="quiet">New river</button><button id="save-btn" class="primary">Save river</button></nav>
+</header>
+<div class="workspace-head"><div><span id="document-name">Email threat reduction</span><span id="save-state" role="status" aria-live="polite">Unsaved example</span></div><div class="document-actions"><button id="undo-btn" class="icon-button" title="Undo (Ctrl/⌘ Z)" aria-label="Undo" disabled>↶</button><button id="redo-btn" class="icon-button" title="Redo (Ctrl/⌘ Shift Z)" aria-label="Redo" disabled>↷</button><button id="copy-btn" class="quiet">Copy link</button><button id="copy-river-btn" class="quiet">Save a copy</button></div></div>
+<main class="workspace">
+<aside id="inspector" class="inspector" tabindex="-1">
+<div class="tabs" role="tablist" aria-label="Editor section"><button id="river-tab" role="tab" aria-selected="true" aria-controls="river-panel" class="selected">River</button><button id="style-tab" role="tab" aria-selected="false" aria-controls="style-panel" tabindex="-1">Style</button></div>
+<div id="river-panel" role="tabpanel" aria-labelledby="river-tab"></div><div id="style-panel" role="tabpanel" aria-labelledby="style-tab" hidden></div>
+</aside>
+<section class="preview-area" aria-label="Diagram preview">
+<div class="preview-tools"><div class="mode-buttons"><button id="edit-view-btn" class="selected" aria-pressed="true">Diagram</button><button id="compare-btn" aria-pressed="false">Compare</button></div><div class="export-tools"><button id="present-btn" class="quiet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V4h4m8 0h4v4m0 8v4h-4M8 20H4v-4"/></svg>Present</button><button id="export-btn" class="primary"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v5h14v-5"/></svg>Export</button></div></div>
+<div id="compare-bar" class="compare-bar" hidden><label>Compare with <select id="compare-select"><option value="">Choose a saved river</option></select></label><span>Each uses its own starting scale.</span></div>
+<div id="canvas-wrap" class="canvas-wrap"><div id="canvas" class="slide"></div></div>
+<div class="canvas-footer"><span id="canvas-caption">16:9 slide · click a control to edit</span><div id="pages" class="pagination" hidden><button id="prev-page" aria-label="Previous slide">←</button><span id="page-label">Slide 1 of 1</span><button id="next-page" aria-label="Next slide">→</button></div><button id="scale-toggle" class="scale-toggle">Presentation scale</button></div>
+<div class="flow-summary" id="flow-summary"></div>
+<div class="preview-tip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4C5 4 8 6 11 5V9C16 9 18 7 22 8V15C18 14 16 16 11 16V20C8 21 5 19 2 19Z" fill="currentColor" stroke="none"/><path d="M10 5h3v4h-3ZM10 16h3v4h-3Z" fill="#163347" stroke="none"/></svg><p>Gates close evenly from both banks. Each pair acts only on the flow reaching it.</p></div>
+</section>
+</main>
+<div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+<dialog id="save-dialog"><form id="save-form"><div class="dialog-heading"><h2 id="save-dialog-title">Save your river</h2><button type="button" class="icon-button close-dialog" aria-label="Close">×</button></div><p>A name you can return to, and a link you can share.</p><label>River title<input id="save-title" maxlength="100" required></label><label>URL name<input id="save-slug" maxlength="80" pattern="[a-z0-9]+(-[a-z0-9]+)*" required autocapitalize="none" spellcheck="false"></label><p id="url-preview" class="url-preview"></p><p class="hint">Anyone with access to this server can view and edit saved rivers.</p><p id="save-error" class="error" role="alert"></p><div class="dialog-actions"><button type="button" class="quiet close-dialog">Cancel</button><button type="submit" class="primary">Save river</button></div></form></dialog>
+<dialog id="library-dialog" class="library-dialog"><div class="dialog-heading"><h2>Saved rivers</h2><button class="icon-button close-dialog" aria-label="Close">×</button></div><label class="search-label">Find a river<input id="library-search" type="search" placeholder="Search by title or URL name"></label><div id="library-list" class="library-list"></div></dialog>
+<dialog id="export-dialog"><div class="dialog-heading"><h2>Ready for the slide deck</h2><button class="icon-button close-dialog" aria-label="Close">×</button></div><p>Export the slide exactly as shown in the preview.</p><div class="export-choices"><button id="export-svg"><strong>SVG</strong><span>Vector · sharp at any size</span><small>Best for PowerPoint, Keynote, and design tools</small></button><button id="export-png"><strong>PNG</strong><span>3840 × 2160 · high resolution</span><small>Ready to drop into any presentation</small></button></div><label class="checkbox"><input type="checkbox" id="transparent-export">Transparent background</label><p id="export-pages-note" class="hint"></p><div class="data-actions"><button id="export-json" class="quiet">Download river data</button><button id="import-btn" class="quiet">Import river data</button></div><input id="import-file" type="file" accept=".json,application/json" hidden></dialog>
+<dialog id="new-dialog"><div class="dialog-heading"><h2>Start a river</h2><button class="icon-button close-dialog" aria-label="Close">×</button></div><p id="new-warning"></p><div class="start-choices"><button id="start-blank"><strong>Blank river</strong><span>Your source, your controls, your story.</span></button><button id="start-example"><strong>Email security example</strong><span>From 4 million emails to 0 incidents.</span></button></div></dialog>
+<dialog id="confirm-dialog"><div class="dialog-heading"><h2 id="confirm-title">Confirm</h2><button class="icon-button close-dialog" aria-label="Close">×</button></div><p id="confirm-text"></p><div class="dialog-actions"><button id="confirm-cancel" class="quiet">Cancel</button><button id="confirm-yes" class="primary">Continue</button></div></dialog>
+<div id="presentation" class="presentation" role="dialog" aria-modal="true" aria-label="Slide presentation" hidden><div id="presentation-canvas"></div><div class="presentation-actions"><button id="present-prev" aria-label="Previous slide">←</button><span id="present-page"></span><button id="present-next" aria-label="Next slide">→</button><button id="exit-present">Exit presentation <kbd>Esc</kbd></button></div></div>
+<noscript>Enable JavaScript to build and export river diagrams.</noscript>
+</body></html>
