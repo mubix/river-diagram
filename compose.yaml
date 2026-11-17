@@ -1,7 +1,6 @@
 services:
   river:
-    build: .
-    image: river-diagram:local
+    image: ghcr.io/mubix/river-diagram:latest
     container_name: river-diagram
     restart: unless-stopped
     labels:
