@@ -4,6 +4,9 @@ A self-hosted diagram editor for showing how successive controls reduce a quanti
 
 Curved banks, shaded water with restrained current lines, and ribbed gate panels with bank supports give the drawing an aerial river appearance. Every detail is vector geometry derived from the selected river color, gate color, and background, so company palettes and transparent exports remain usable. The curves shift the river without changing its measured water width. Bank shelves and gate supports are illustration, not additional flow.
 
+<img width="1736" height="915" alt="image" src="https://github.com/user-attachments/assets/f03d9c8a-d415-4e09-afc5-d0700f152a1a" />
+
+
 ## Quick start
 
 With Docker and Docker Compose installed, run from the repository directory:
